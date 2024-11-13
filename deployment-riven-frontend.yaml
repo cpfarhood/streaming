@@ -1,0 +1,57 @@
+## Deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: riven-frontend
+  name: riven-frontend
+  namespace: mediaserver
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: riven-frontend
+  template:
+    metadata:
+      labels:
+        app: riven-frontend
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: riven-frontend
+          image: spoked/riven-frontend:latest
+          env:
+            - name: BACKEND_URL
+              value: http://riven:8080
+            - name: DATABASE_URL
+              value: postgres://postgres:postgres@riven-db/riven
+            - name: DIALECT
+              value: postgres
+            - name: ORIGIN
+              value: http://riven.mediaserver.k8s
+            - name: PGID
+              value: "1000"
+            - name: PUID
+              value: "1000"
+            - name: TZ
+              value: America/Detroit
+          ports:
+            - name: frontend-http
+              containerPort: 3000
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "100m"
+            limits:
+              memory: "2Gi"
+              cpu: "2000m"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: frontend-http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: frontend-http
+              failureThreshold: 5
