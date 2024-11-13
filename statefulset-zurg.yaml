@@ -47,6 +47,13 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
+        startupProbe:
+          httpGet:
+            path: /http/__unplayable__/ubuntu-24.04.1-live-server-amd64.iso/
+            port: zurg-http
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          failureThreshold: 30      # depending on how much content you have the pod can take a long time to reach ready
         livenessProbe:                # Check that the http server is responding to ensure the container is up
           httpGet:
             path: /
@@ -55,10 +62,9 @@ spec:
           httpGet:
             path: /http/__unplayable__/ubuntu-24.04.1-live-server-amd64.iso/
             port: zurg-http
-          initialDelaySeconds: 60
-          periodSeconds: 60
-          failureThreshold: 15
-      volumes:
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          failureThreshold: 3      # depending on how much content you have the pod can take a long time to reach ready      volumes:
       - name: config
         secret:
           secretName: zurg-config
