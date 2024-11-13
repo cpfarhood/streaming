@@ -1,0 +1,17 @@
+## Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: zurg
+   namespace: mediaserver
+   labels:
+     app: zurg
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+  - port: 80
+    targetPort: 9999
+  selector:
+    app: zurg
