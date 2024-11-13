@@ -1,0 +1,15 @@
+## Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: riven-db
+  name: riven-db
+spec:
+  ports:
+    - name: "riven-db"
+      port: 5432
+      targetPort: 5432
+  selector:
+    app: riven-db
