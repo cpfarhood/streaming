@@ -19,14 +19,18 @@ spec:
       containers:
         - name: riven
           env:
-            - name: PGID
-              value: "911"
-            - name: PUID
-              value: "911"
+            - name: RIVEN_SYMLINK_RCLONE_PATH
+              value: "/media/remote/__all__/"
+            - name: RIVEN_SYMLINK_LIBRARY_PATH
+              value: "/media/local/"
             - name: RIVEN_DATABASE_HOST
               value: postgresql+psycopg2://postgres:postgres@riven-db/riven
             - name: RIVEN_FORCE_ENV
               value: "true"
+            - name: PGID
+              value: "911"
+            - name: PUID
+              value: "911"
             - name: TZ
               value: America/Detroit
           image: spoked/riven:latest
