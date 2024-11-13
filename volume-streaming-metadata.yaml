@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: streaming-metadata
+spec:
+  accessModes: [ ReadWriteMany ]
+  storageClassName: longhorn-perpetual
+  resources:
+    requests:
+      storage: 32Gi
+  selector:
+    matchLabels:
+      name: streaming-metadata
