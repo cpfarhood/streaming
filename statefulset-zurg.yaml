@@ -1,0 +1,79 @@
+## StatefulSet
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: zurg
+spec:
+  selector:
+    matchLabels:
+      app: zurg
+  affinity:
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+           matchExpressions:
+            - key: <label-key>
+              operator: In
+              values:
+              - <label-value>
+          topologyKey: kubernetes.io/hostname
+  serviceName: "zurg"
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: zurg
+    spec:
+      containers:
+      - name: zurg
+        image: ghcr.io/debridmediamanager/zurg-testing:latest
+        ports:
+        - name: zurg-http
+          containerPort: 9999
+        volumeMounts:
+        - name: zurg-data
+          mountPath: "/app/data"
+        - name: zurg-config
+          mountPath: /app/config.yml
+          subPath: config.yml
+          readOnly: true
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        readinessProbe:                # Check that the http server is responding to ensure the container is up
+          httpGet:
+            path: /
+            port: zurg-http
+        livenessProbe:                 # Check that the chose torrent is available to ensure the container is serving data
+          httpGet:
+            path: /http/__unplayable__/ubuntu-24.04.1-live-server-amd64.iso/
+            port: zurg-http
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          failureThreshold: 15
+      volumes:
+      - name: zurg-config
+        secret:
+          secretName: zurg-config
+          items:
+          - key: config.yml
+            path: config.yml
+  volumeClaimTemplates:
+  - metadata:
+      name: zurg-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: longhorn-perpetual
+      resources:
+        requests:
+          storage: 32Gi
+      selector:
+        matchLabels:
+          name: zurg-data
