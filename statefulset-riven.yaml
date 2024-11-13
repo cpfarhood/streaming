@@ -73,7 +73,7 @@ spec:
         - name: metadata
           nfs:
             path: /exports/
-            server: metadata-server
+            server: metadata-server.streaming.k8s
   volumeClaimTemplates:
   - metadata:
       name: config
