@@ -13,6 +13,3 @@ spec:
   resources:
     requests:
       storage: 32Gi
-  selector:
-    matchLabels:
-      name: metadata
