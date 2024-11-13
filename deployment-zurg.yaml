@@ -1,7 +1,7 @@
 ## StatefulSet
 ---
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: zurg
 spec:
@@ -65,15 +65,6 @@ spec:
           items:
           - key: config.yml
             path: config.yml
-  volumeClaimTemplates:
-  - metadata:
-      name: zurg-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: longhorn-perpetual
-      resources:
-        requests:
-          storage: 32Gi
-      selector:
-        matchLabels:
-          name: zurg-data
+      - name: zurg-data
+        emptyDir: 
+          sizeLimit: 8Gi
