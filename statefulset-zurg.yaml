@@ -65,6 +65,7 @@ spec:
           initialDelaySeconds: 15
           periodSeconds: 5
           failureThreshold: 3      # depending on how much content you have the pod can take a long time to reach ready      volumes:
+      volumes:
       - name: config
         secret:
           secretName: zurg-config
