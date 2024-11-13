@@ -47,11 +47,11 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
-        readinessProbe:                # Check that the http server is responding to ensure the container is up
+        livenessProbe:                # Check that the http server is responding to ensure the container is up
           httpGet:
             path: /
             port: zurg-http
-        livenessProbe:                 # Check that the chose torrent is available to ensure the container is serving data
+        readinessProbe:                 # Check that the chose torrent is available to ensure the container is serving data
           httpGet:
             path: /http/__unplayable__/ubuntu-24.04.1-live-server-amd64.iso/
             port: zurg-http
