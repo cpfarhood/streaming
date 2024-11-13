@@ -1,0 +1,16 @@
+## Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: riven
+  name: riven
+  namespace: mediaserver
+spec:
+  ports:
+    - name: "riven"
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: riven
