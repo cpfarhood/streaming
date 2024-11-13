@@ -62,9 +62,6 @@ spec:
               name: local
       restartPolicy: Always
       volumes:
-        - name: config
-          persistentVolumeClaim:
-            claimName: riven-config
         - name: remote
           persistentVolumeClaim:
             claimName: mediaserver-remote
@@ -72,3 +69,11 @@ spec:
           nfs:
             path: /mnt/pool0/media
             server: truenas.farhoodliquor.dmz
+  volumeClaimTemplates:
+  - metadata:
+      name: config
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 4Gi
