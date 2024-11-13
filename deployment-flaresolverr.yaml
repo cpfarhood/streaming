@@ -3,32 +3,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sonarr
+  name: flaresolverr
 spec:
   selector:
     matchLabels:
-      app: sonarr
-  serviceName: "sonarr"
+      app: flaresolverr
+  serviceName: "flaresolverr"
   replicas: 1
   template:
     metadata:
       labels:
-        app: sonarr
+        app: flaresolverr
     spec:
       containers:
-      - name: sonarr
-        image: lscr.io/linuxserver/sonarr:latest
+      - name: flaresolverr
+        image: ghcr.io/flaresolverr/flaresolverr:latest
         ports:
-        - containerPort: 8989
-          name: http-8989
-        volumeMounts:
-        - name: config
-          mountPath: "/config"
+        - containerPort: 8191
+          name: http-8191
+#        volumeMounts:
+#        - name: config
+#          mountPath: "/config"
         resources:
           requests:
             memory: "128Mi"
             cpu: "100m"
-      volumes:
-      - name: config
-        persistentVolumeClaim:
-          claimName: sonarr-config
+#      volumes:
+#      - name: config
+#        persistentVolumeClaim:
+#          claimName: sonarr-config
