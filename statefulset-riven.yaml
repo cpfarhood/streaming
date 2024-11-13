@@ -31,14 +31,15 @@ spec:
               value: America/Detroit
           image: spoked/riven:latest
           readinessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: backend-http
+            #httpGet:
+            #  path: /
+            #  port: backend-http
             periodSeconds: 30
             timeoutSeconds: 10
           livenessProbe:
-            httpGet:
-              path: /
+            tcpSocket:
               port: backend-http
             failureThreshold: 10
             periodSeconds: 30
