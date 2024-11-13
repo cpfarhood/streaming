@@ -4,7 +4,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sonarr
-  namespace: mediaserver
 spec:
   selector:
     matchLabels:
@@ -25,12 +24,6 @@ spec:
         volumeMounts:
         - name: config
           mountPath: "/config"
-        - name: library
-          mountPath: /media/library
-        - name: remote
-          mountPath: "/media/remote"
-        - name: shows
-          mountPath: "/media/local/shows"
         resources:
           requests:
             memory: "128Mi"
@@ -39,32 +32,3 @@ spec:
       - name: config
         persistentVolumeClaim:
           claimName: sonarr-config
-      - name: library
-        persistentVolumeClaim:
-          claimName: mediaserver-library
-      - name: shows
-        persistentVolumeClaim:
-          claimName: mediaserver-shows
-      - name: remote
-        persistentVolumeClaim:
-          claimName: mediaserver-remote
-
-
-## Volumes
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: sonarr-config
-  namespace: mediaserver
-  labels:
-    name: sonarr-config
-    kustomize.toolkit.fluxcd.io/prune: disabled
-spec:
-  accessModes:
-  - ReadWriteOnce
-  storageClassName: longhorn-perpetual
-  resources:
-    requests:
-      storage: 8Gi
----
