@@ -64,11 +64,10 @@ spec:
       volumes:
         - name: remote
           persistentVolumeClaim:
-            claimName: mediaserver-remote
-        - name: local
-          nfs:
-            path: /mnt/pool0/media
-            server: truenas.farhoodliquor.dmz
+            claimName: remote-media
+        - name: metadata
+          persistentVolumeClaim:
+            claimName: metadata
   volumeClaimTemplates:
   - metadata:
       name: config
