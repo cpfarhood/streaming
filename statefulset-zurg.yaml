@@ -1,7 +1,7 @@
-## Deployment
+## StatefulSet
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: zurg
 spec:
@@ -34,9 +34,9 @@ spec:
         - name: zurg-http
           containerPort: 9999
         volumeMounts:
-        - name: zurg-data
+        - name: data
           mountPath: "/app/data"
-        - name: zurg-config
+        - name: config
           mountPath: /app/config.yml
           subPath: config.yml
           readOnly: true
@@ -59,15 +59,21 @@ spec:
           periodSeconds: 60
           failureThreshold: 15
       volumes:
-      - name: zurg-config
+      - name: config
         secret:
           secretName: zurg-config
           items:
           - key: config.yml
             path: config.yml
-      - name: zurg-data
-        emptyDir: 
-          sizeLimit: 4Gi
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: longhorn-perpetual
+      resources:
+        requests:
+          storage: 8Gi
 ---
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
