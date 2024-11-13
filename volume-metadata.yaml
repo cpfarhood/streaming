@@ -8,8 +8,10 @@ metadata:
     name: metadata
     kustomize.toolkit.fluxcd.io/prune: disabled
 spec:
-  accessModes: [ ReadWriteMany ]
+  accessModes: [ ReadWriteOnce ]
   storageClassName: longhorn-perpetual
   resources:
     requests:
       storage: 32Gi
+    matchLabels:
+      name: streaming-metadata
