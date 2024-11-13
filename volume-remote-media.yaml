@@ -1,0 +1,30 @@
+## This is the rclone volume that mounts the remote debrid media library via zurg
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: remote-media
+  namespace: streaming
+  labels:
+    name: remote-media
+spec:
+  accessModes: [ ReadOnlyMany ]
+  persistentVolumeReclaimPolicy: Retain
+  capacity:
+    storage: 10Gi
+  storageClassName: rclone
+  csi:
+    driver: csi-rclone
+    volumeHandle: data-id
+    volumeAttributes:
+      remote: "http"
+      remotePath: "/http/"
+      http-url: "http://zurg.streaming.k8s/http/"
+      attr-timeout: "1h"
+      buffer-size: "128MiB"
+      vfs-cache-mode: "full"
+      vfs-cache-max-age: "24h"
+      vfs-cache-max-size: "128G"
+      vfs-read-chunk-size: "32M"
+      vfs-read-chunk-size-limit: "1G"
+      vfs-disk-space-total-size: "10PiB"
