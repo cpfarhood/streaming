@@ -1,4 +1,4 @@
-## StatefulSet
+## Deployment
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -67,4 +67,4 @@ spec:
             path: config.yml
       - name: zurg-data
         emptyDir: 
-          sizeLimit: 8Gi
+          sizeLimit: 4Gi
