@@ -54,12 +54,12 @@ spec:
             - name: backend-http
               containerPort: 8080
           volumeMounts:
-            - mountPath: /riven/data
-              name: config
-            - mountPath: /media/remote
-              name: remote
-            - mountPath: /media/local
-              name: local
+            - name: config
+              mountPath: /riven/data
+            - name: remote
+              mountPath: /media/remote
+            - name: metadata
+              mountPath: /media/local
       restartPolicy: Always
       volumes:
         - name: remote
