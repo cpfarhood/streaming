@@ -1,0 +1,74 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: riven
+  name: riven
+spec:
+  selector:
+    matchLabels:
+      app: riven
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: riven
+    spec:
+      containers:
+        - name: riven
+          env:
+            - name: PGID
+              value: "911"
+            - name: PUID
+              value: "911"
+            - name: RIVEN_DATABASE_HOST
+              value: postgresql+psycopg2://postgres:postgres@riven-db/riven
+            - name: RIVEN_FORCE_ENV
+              value: "true"
+            - name: TZ
+              value: America/Detroit
+          image: spoked/riven:latest
+          readinessProbe:
+            httpGet:
+              path: /
+              port: backend-http
+            periodSeconds: 30
+            timeoutSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: backend-http
+            failureThreshold: 10
+            periodSeconds: 30
+            timeoutSeconds: 10
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "1000m"
+            limits:
+              memory: "4Gi"
+              cpu: "4000m"
+          ports:
+            - name: backend-http
+              containerPort: 8080
+          volumeMounts:
+            - mountPath: /riven/data
+              name: config
+            - mountPath: /media/remote
+              name: remote
+            - mountPath: /media/local
+              name: local
+      restartPolicy: Always
+      volumes:
+        - name: config
+          persistentVolumeClaim:
+            claimName: riven-config
+        - name: remote
+          persistentVolumeClaim:
+            claimName: mediaserver-remote
+        - name: local
+          nfs:
+            path: /mnt/pool0/media
+            server: truenas.farhoodliquor.dmz
