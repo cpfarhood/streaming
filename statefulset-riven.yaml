@@ -72,10 +72,7 @@ spec:
             claimName: remote-media
         - name: metadata
           persistentVolumeClaim:
-            claimName: metadata
-          #nfs:
-          #  path: /exports/
-          #  server: metadata-server.streaming.k8s
+            claimName: streaming-metadata
   volumeClaimTemplates:
   - metadata:
       name: config
