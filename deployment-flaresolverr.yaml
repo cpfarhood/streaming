@@ -8,7 +8,6 @@ spec:
   selector:
     matchLabels:
       app: flaresolverr
-  serviceName: "flaresolverr"
   replicas: 1
   template:
     metadata:
