@@ -1,0 +1,16 @@
+## Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: prowlarr
+   namespace: mediaserver
+   labels:
+     app: prowlarr
+spec:
+  type: ClusterIP
+  #clusterIP: None
+  ports:
+  - port: 9696
+  selector:
+    app: prowlarr
