@@ -85,7 +85,7 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: zurg-hpa
+  name: zurg
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
