@@ -20,14 +20,10 @@ spec:
         ports:
         - containerPort: 8191
           name: http-8191
-#        volumeMounts:
-#        - name: config
-#          mountPath: "/config"
         resources:
           requests:
-            memory: "128Mi"
-            cpu: "100m"
-#      volumes:
-#      - name: config
-#        persistentVolumeClaim:
-#          claimName: sonarr-config
+            memory: "256Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
