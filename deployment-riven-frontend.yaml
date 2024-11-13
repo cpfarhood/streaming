@@ -21,14 +21,14 @@ spec:
         - name: riven-frontend
           image: spoked/riven-frontend:latest
           env:
+            - name: ORIGIN
+              value: "http://riven.streaming.k8s"  # Set to FQDN of the ingress
             - name: BACKEND_URL
               value: http://riven:8080
             - name: DATABASE_URL
               value: postgres://postgres:postgres@riven-db/riven
             - name: DIALECT
               value: postgres
-            - name: ORIGIN
-              value: http://riven.mediaserver.k8s
             - name: PGID
               value: "1000"
             - name: PUID
