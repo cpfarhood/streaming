@@ -5,13 +5,13 @@ kind: PersistentVolumeClaim
 metadata:
   name: streaming-metadata
   labels:
-    name: streaming-metadata
+    name: metadata
     kustomize.toolkit.fluxcd.io/prune: disabled
 spec:
-  accessModes: [ ReadWriteOnce ]
+  accessModes: [ ReadWriteMany ]
   storageClassName: longhorn-perpetual
   resources:
     requests:
-      storage: 32Gi
+      storage: 64Gi
     matchLabels:
-      name: streaming-metadata
+      name: metadata
