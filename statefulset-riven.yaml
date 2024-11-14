@@ -70,11 +70,16 @@ spec:
               mountPath: /media/remote
             - name: local
               mountPath: /media/local
+            - name: local
+              mountPath: /media/metadata
       restartPolicy: Always
       volumes:
         - name: remote
           persistentVolumeClaim:
             claimName: remote-media
+        - name: metadata
+          persistentVolumeClaim:
+            claimName: metadata
         - name: local
           nfs:
             path: /mnt/pool0/media
