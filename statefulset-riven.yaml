@@ -3,20 +3,20 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: riven
+    app.kubernetes.io/name: riven
   annotations:
     polaris.fairwinds.com/tagNotSpecified-exempt: true  # Latest tag is desired here
   name: riven
 spec:
   selector:
     matchLabels:
-      app: riven
+      app.kubernetes.io/name: riven
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: riven
+        app.kubernetes.io/name: riven
     spec:
       containers:
         - name: riven

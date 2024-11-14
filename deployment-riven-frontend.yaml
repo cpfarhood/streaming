@@ -4,7 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: riven-frontend
+    app.kubernetes.io/name: riven-frontend
   annotations:
     polaris.fairwinds.com/tagNotSpecified-exempt: true  # Latest tag is desired here
   name: riven-frontend
@@ -12,11 +12,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: riven-frontend
+      app.kubernetes.io/name: riven-frontend
   template:
     metadata:
       labels:
-        app: riven-frontend
+        app.kubernetes.io/name: riven-frontend
     spec:
       restartPolicy: Always
       containers:

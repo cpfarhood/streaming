@@ -5,18 +5,18 @@ kind: Deployment
 metadata:
   name: flaresolverr
   labels:
-    app: flaresolverr
+    app.kubernetes.io/name: flaresolverr
   annotations:
     polaris.fairwinds.com/tagNotSpecified-exempt: true  # Latest tag is desired here
 spec:
   selector:
     matchLabels:
-      app: flaresolverr
+      app.kubernetes.io/name: flaresolverr
   replicas: 1
   template:
     metadata:
       labels:
-        app: flaresolverr
+        app.kubernetes.io/name: flaresolverr
     spec:
       containers:
       - name: flaresolverr

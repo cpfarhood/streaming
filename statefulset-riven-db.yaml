@@ -4,18 +4,18 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   labels:
-    app: riven-db
+    app.kubernetes.io/name: riven-db
   annotations:
     polaris.fairwinds.com/runAsRootAllowed-exempt: true  # root is required by this container
   name: riven-db
 spec:
   selector:
     matchLabels:
-      app: riven-db
+      app.kubernetes.io/name: riven-db
   template:
     metadata:
       labels:
-        app: riven-db
+        app.kubernetes.io/name: riven-db
     spec:
       containers:
         - name: riven-db

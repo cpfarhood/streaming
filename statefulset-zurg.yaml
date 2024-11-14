@@ -5,13 +5,13 @@ kind: StatefulSet
 metadata:
   name: zurg
   labels:
-    app: zurg
+    app.kubernetes.io/name: zurg
   annotations:
     polaris.fairwinds.com/tagNotSpecified-exempt: true  # Latest tag is desired here
 spec:
   selector:
     matchLabels:
-      app: zurg
+      app.kubernetes.io/name: zurg
   affinity:
     podAntiAffinity:
       preferredDuringSchedulingIgnoredDuringExecution:
@@ -29,7 +29,7 @@ spec:
   template:
     metadata:
       labels:
-        app: zurg
+        app.kubernetes.io/name: zurg
     spec:
       containers:
       - name: zurg
