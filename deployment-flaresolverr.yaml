@@ -4,6 +4,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: flaresolverr
+  labels:
+    app: flaresolverr
+  annotations:
+    polaris.fairwinds.com/tagNotSpecified-exempt: true  # Latest tag is desired here
 spec:
   selector:
     matchLabels:
