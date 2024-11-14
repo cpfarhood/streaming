@@ -4,6 +4,10 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: zurg
+  labels:
+    app: zurg
+  annotations:
+    polaris.fairwinds.com/tagNotSpecified-exempt: true  # Latest tag is desired here
 spec:
   selector:
     matchLabels:

@@ -5,6 +5,8 @@ kind: Deployment
 metadata:
   labels:
     app: riven-frontend
+  annotations:
+    polaris.fairwinds.com/tagNotSpecified-exempt: true  # Latest tag is desired here
   name: riven-frontend
 spec:
   replicas: 2

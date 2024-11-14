@@ -4,6 +4,8 @@ kind: StatefulSet
 metadata:
   labels:
     app: riven
+  annotations:
+    polaris.fairwinds.com/tagNotSpecified-exempt: true  # Latest tag is desired here
   name: riven
 spec:
   selector:
