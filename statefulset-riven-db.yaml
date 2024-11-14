@@ -1,4 +1,4 @@
-## StatefulSets
+## PostgreSQL StatefulSet for Riven
 ---
 apiVersion: apps/v1
 kind: StatefulSet
