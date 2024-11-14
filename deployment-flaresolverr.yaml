@@ -1,4 +1,4 @@
-## Deployment
+## This is a proxy that solves Cloudflare's CAPTCHA challenge for automated services
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -53,7 +53,7 @@ spec:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 50
+          averageUtilization: 75
   behavior:
     scaleDown:
       stabilizationWindowSeconds: 300
