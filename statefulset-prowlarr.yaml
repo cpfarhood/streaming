@@ -6,6 +6,8 @@ metadata:
   name: prowlarr
   labels:
     app.kubernetes.io/name: prowlarr
+  annotations:
+    polaris.fairwinds.com/tagNotSpecified-exempt: true  # Latest tag is desired here
 spec:
   selector:
     matchLabels:
@@ -19,7 +21,7 @@ spec:
     spec:
       containers:
       - name: prowlarr
-        image: lscr.io/linuxserver/prowlarr:latest
+        image: lscr.io/linuxserver/prowlarr:1.25.x
         ports:
         - name: prowlarr-http
           containerPort: 9696
