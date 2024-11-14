@@ -1,4 +1,4 @@
-## StatefulSet
+## This is a service that translates Debrid to http/dav
 ---
 apiVersion: apps/v1
 kind: StatefulSet
