@@ -4,6 +4,8 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: prowlarr
+   labels:
+     app: prowlarr
 spec:
   selector:
     matchLabels:
@@ -37,6 +39,9 @@ spec:
             path: /
             port: prowlarr-http
             failureThreshold: 5
+        securityContext:
+          allowPrivilegeEscalation: false
+          runasNonRoot: true
   volumeClaimTemplates:
   - metadata:
       name: config
