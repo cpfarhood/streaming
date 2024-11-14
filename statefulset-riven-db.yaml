@@ -5,6 +5,8 @@ kind: StatefulSet
 metadata:
   labels:
     app: riven-db
+  annotations:
+    polaris.fairwinds.com/runAsRootAllowed-exempt: true
   name: riven-db
 spec:
   selector:
