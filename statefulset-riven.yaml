@@ -33,7 +33,7 @@ spec:
               value: "911"
             - name: TZ
               value: America/Detroit
-          image: spoked/riven:17.0
+          image: spoked/riven:latest
           readinessProbe:
             tcpSocket:
               port: backend-http
