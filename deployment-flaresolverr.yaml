@@ -16,10 +16,13 @@ spec:
     spec:
       containers:
       - name: flaresolverr
-        image: ghcr.io/flaresolverr/flaresolverr:latest
+        image: ghcr.io/flaresolverr/flaresolverr:3.3.21
         ports:
         - containerPort: 8191
           name: http-8191
+        securityContext:
+          allowPrivilegeEscalation: false
+          runasNonRoot: true
         resources:
           requests:
             memory: "256Mi"

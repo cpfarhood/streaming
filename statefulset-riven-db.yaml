@@ -18,6 +18,7 @@ spec:
       containers:
         - name: riven-db
           image: postgres:17.0
+          imagPullPolicy: Always
           ports:
             - containerPort: 5432
               protocol: TCP
@@ -54,8 +55,14 @@ spec:
               name: data
           resources:
             requests:
+              memory: "256Mi"
+              cpu: "100m"
+            limits:
               memory: "1Gi"
-              cpu: "500m"
+              cpu: "400m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runasNonRoot: true
       restartPolicy: Always
   volumeClaimTemplates:
   - metadata:

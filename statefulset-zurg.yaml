@@ -47,6 +47,9 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
+        securityContext:
+          allowPrivilegeEscalation: false
+          runasNonRoot: true
         startupProbe:
           httpGet:
             path: /http/__unplayable__/ubuntu-24.04.1-live-server-amd64.iso/

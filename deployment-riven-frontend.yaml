@@ -19,7 +19,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: riven-frontend
-          image: spoked/riven-frontend:latest
+          image: spoked/riven-frontend:18.0
           env:
             - name: ORIGIN
               value: "http://riven.streaming.k8s"  # Set to FQDN of the ingress
@@ -45,6 +45,9 @@ spec:
             limits:
               memory: "2Gi"
               cpu: "2000m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runasNonRoot: true
           readinessProbe:
             httpGet:
               path: /

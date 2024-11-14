@@ -33,7 +33,7 @@ spec:
               value: "911"
             - name: TZ
               value: America/Detroit
-          image: spoked/riven:latest
+          image: spoked/riven:17.0
           readinessProbe:
             tcpSocket:
               port: backend-http
@@ -55,6 +55,9 @@ spec:
             limits:
               memory: "4Gi"
               cpu: "4000m"
+          securityContext:
+            allowPrivilegeEscalation: false
+            runasNonRoot: true
           ports:
             - name: backend-http
               containerPort: 8080
