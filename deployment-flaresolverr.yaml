@@ -21,6 +21,7 @@ spec:
       containers:
       - name: flaresolverr
         image: ghcr.io/flaresolverr/flaresolverr:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8191
           name: http-8191
