@@ -52,11 +52,11 @@ spec:
             timeoutSeconds: 10
           resources:
             requests:
-              memory: "1Gi"
-              cpu: "1000m"
+              memory: "512Mi"
+              cpu: "100m"
             limits:
-              memory: "4Gi"
-              cpu: "4000m"
+              memory: "1Gi"
+              cpu: "250m"
           securityContext:
             allowPrivilegeEscalation: false
             runasNonRoot: true
