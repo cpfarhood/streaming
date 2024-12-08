@@ -6,7 +6,6 @@ metadata:
   name: remotemedia-pv
   labels:
     name: remotemedia
-  labels:
     kustomize.toolkit.fluxcd.io/prune: disabled
 spec:
   accessModes: [ ReadOnlyMany ]
