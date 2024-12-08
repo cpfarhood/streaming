@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: streaming
+resources:
+# Shared Volumes
+  - volumes.yaml
+
+# Zurg Media Indexer
+  - statefulset-zurg.yaml
+  - service-zurg.yaml
+  
+# Riven Media Manager
+  - statefulset-riven-db.yaml
+  - service-riven-db.yaml
+  - statefulset-riven.yaml
+  - service-riven.yaml
+  - deployment-riven-frontend.yaml
+  - service-riven-frontend.yaml
+  - ingress-riven-frontend.yaml
+
+
+

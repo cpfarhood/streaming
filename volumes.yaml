@@ -1,11 +1,13 @@
-## This is the rclone volume that mounts the remote debrid media library via zurg
+## Physical Volumes
 ---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: remote-media-pv
+  name: remotemedia-pv
   labels:
-    name: remote-media
+    name: remotemedia
+  labels:
+    kustomize.toolkit.fluxcd.io/prune: disabled
 spec:
   accessModes: [ ReadOnlyMany ]
   persistentVolumeReclaimPolicy: Retain
@@ -27,11 +29,16 @@ spec:
       vfs-read-chunk-size: "32M"
       vfs-read-chunk-size-limit: "1G"
       vfs-disk-space-total-size: "10PiB"
+
+---
+## Volume Claims
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: remote-media
+  name: remotemedia
+  labels:
+    kustomize.toolkit.fluxcd.io/prune: disabled
 spec:
   accessModes: [ ReadOnlyMany ]
   storageClassName: rclone
@@ -40,4 +47,18 @@ spec:
       storage: 10Gi
   selector:
     matchLabels:
-      name: remote-media
+      name: remotemedia
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: metadata
+  labels:
+    kustomize.toolkit.fluxcd.io/prune: disabled
+spec:
+  accessModes: [ ReadWriteMany ]
+  storageClassName: longhorn-perpetual
+  resources:
+    requests:
+      storage: 32Gi

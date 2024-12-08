@@ -9,7 +9,7 @@ metadata:
     polaris.fairwinds.com/tagNotSpecified-exempt: true  # Latest tag is desired here
   name: riven-frontend
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: riven-frontend
@@ -60,26 +60,26 @@ spec:
               port: frontend-http
               failureThreshold: 5
 ---
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: riven-frontend
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: riven-frontend
-  minReplicas: 2
-  maxReplicas: 3
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        target:
-          type: Utilization
-          averageUtilization: 50
-  behavior:
-    scaleDown:
-      stabilizationWindowSeconds: 300
-    scaleUp:
-      stabilizationWindowSeconds: 60          
+#apiVersion: autoscaling/v2
+#kind: HorizontalPodAutoscaler
+#metadata:
+#  name: riven-frontend
+#spec:
+#  scaleTargetRef:
+#    apiVersion: apps/v1
+#    kind: Deployment
+#    name: riven-frontend
+#  minReplicas: 2
+#  maxReplicas: 3
+#  metrics:
+#    - type: Resource
+#      resource:
+#        name: cpu
+#        target:
+#          type: Utilization
+#          averageUtilization: 50
+#  behavior:
+#    scaleDown:
+#     stabilizationWindowSeconds: 300
+#    scaleUp:
+#      stabilizationWindowSeconds: 60          

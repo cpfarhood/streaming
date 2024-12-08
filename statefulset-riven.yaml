@@ -66,24 +66,18 @@ spec:
           volumeMounts:
             - name: config
               mountPath: /riven/data
-            - name: remote
+            - name: remotemedia
               mountPath: /media/remote
-            - name: local
-              mountPath: /media/local
             - name: metadata
               mountPath: /media/metadata
       restartPolicy: Always
       volumes:
-        - name: remote
+        - name: remotemedia
           persistentVolumeClaim:
-            claimName: remote-media
+            claimName: remotemedia
         - name: metadata
           persistentVolumeClaim:
             claimName: metadata
-        - name: local
-          nfs:
-            path: /mnt/pool0/media
-            server: truenas.farhoodliquor.dmz
   volumeClaimTemplates:
   - metadata:
       name: config
