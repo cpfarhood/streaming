@@ -6,6 +6,7 @@ resources:
   - volumes.yaml
 
 # Zurg Media Indexer
+  - sealedsecret-zurg-config.yaml
   - statefulset-zurg.yaml
   - service-zurg.yaml
   

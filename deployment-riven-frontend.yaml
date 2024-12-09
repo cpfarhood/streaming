@@ -40,6 +40,8 @@ spec:
           ports:
             - name: frontend-http
               containerPort: 3000
+          securityContext:
+            allowPrivilegeEscalation: false
           resources:
             requests:
               memory: "100Mi"
