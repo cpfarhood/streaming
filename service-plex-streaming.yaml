@@ -11,7 +11,6 @@ spec:
     app.kubernetes.io/name: plex-streaming
   type: LoadBalancer
   externalTrafficPolicy: Local
-  loadBalancerIP: 65.43.40.109
   ports:
   - port: 443
     targetPort: 32400
