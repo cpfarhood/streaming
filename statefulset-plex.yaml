@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: plex
-  namespace: mediaserver
 spec:
   selector:
     matchLabels:
@@ -37,10 +36,10 @@ spec:
         volumeMounts:
         - name: config
           mountPath: "/config"
-#        - name: remote
-#          mountPath: "/media/remote"
-        - name: local
-          mountPath: "/media/local"
+        - name: remotemedia
+          mountPath: "/media/remote"
+        - name: medatdata
+          mountPath: "/media/medatdata"
         - name: transcode
           mountPath: "/transcode"
         resources:
@@ -61,21 +60,20 @@ spec:
             periodSeconds: 3
             failureThreshold: 5
       volumes:
-      - name: config
-        persistentVolumeClaim:
-          claimName: plex-config
       - name: transcode
         emptyDir: 
           sizeLimit: 128Gi
-      - name: local
-        nfs:
-          path: /mnt/pool0/media
-          server: truenas.farhoodliquor.dmz
-#      - name: local
-#        persistentVolumeClaim:
-#          claimName: mediaserver-local
-#      - name: remote
-#        persistentVolumeClaim:
-#          claimName: mediaserver-remote
-      nodeSelector:
-        intel.feature.node.kubernetes.io/gpu: "true"
+      - name: medatdata
+        persistentVolumeClaim:
+          claimName: medatdata
+      - name: remotemedia
+        persistentVolumeClaim:
+          claimName: remotemedia
+  volumeClaimTemplates:
+  - metadata:
+      name: config
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 32Gi
