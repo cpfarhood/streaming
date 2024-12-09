@@ -38,8 +38,8 @@ spec:
           mountPath: "/config"
         - name: remotemedia
           mountPath: "/media/remote"
-        - name: medatdata
-          mountPath: "/media/medatdata"
+        - name: metatdata
+          mountPath: "/media/metatdata"
         - name: transcode
           mountPath: "/transcode"
         resources:
@@ -63,9 +63,9 @@ spec:
       - name: transcode
         emptyDir: 
           sizeLimit: 128Gi
-      - name: medatdata
+      - name: metatdata
         persistentVolumeClaim:
-          claimName: medatdata
+          claimName: metatdata
       - name: remotemedia
         persistentVolumeClaim:
           claimName: remotemedia
