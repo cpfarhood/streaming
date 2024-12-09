@@ -30,7 +30,7 @@ spec:
         - name: PLEX_GID
           value: "911"
         - name: PLEX_CLAIM
-          value: claim-sLPQHyQbVe5g8yGv4Nf-
+          value: claim-X_J992x6T76yc11EzLSr
 #        - name: ADVERITSE_IP
 #          value: https://0.0.0.0:32400
         volumeMounts:

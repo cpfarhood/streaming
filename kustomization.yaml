@@ -18,5 +18,7 @@ resources:
   - service-riven-frontend.yaml
   - ingress-riven-frontend.yaml
 
-
-
+# Media Servers
+#  - clusterplex.yaml
+  - statefulset-plex.yaml
+  - service-plex.yaml
