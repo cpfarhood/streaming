@@ -20,5 +20,5 @@ resources:
 
 # Media Servers
 #  - clusterplex.yaml
-  - statefulset-plex.yaml
-  - service-plex.yaml
+  - statefulset-plex-streaming.yaml
+  - service-plex-streaming.yaml
