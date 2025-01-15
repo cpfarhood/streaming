@@ -11,13 +11,13 @@ resources:
   - service-zurg.yaml
   
 # Riven Media Manager
-  - statefulset-riven-db.yaml
-  - service-riven-db.yaml
-  - statefulset-riven.yaml
-  - service-riven.yaml
-  - deployment-riven-frontend.yaml
-  - service-riven-frontend.yaml
-  - ingress-riven-frontend.yaml
+#  - statefulset-riven-db.yaml
+#  - service-riven-db.yaml
+#  - statefulset-riven.yaml
+#  - service-riven.yaml
+#  - deployment-riven-frontend.yaml
+#  - service-riven-frontend.yaml
+#  - ingress-riven-frontend.yaml
 
 # Media Servers
 #  - clusterplex.yaml
